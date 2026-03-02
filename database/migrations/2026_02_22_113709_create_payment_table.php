@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('payment', function (Blueprint $table) {
             $table->string('payment_id')->primary();
             $table->string('billing_id');
             $table->float('amount_paid');
             $table->date('paid_at')->useCurrent();
             
-            $table->foreign('billing_id')->references('billing_id')->on('billings')->onDelete('cascade');
+            $table->foreign('billing_id')->references('billing_id')->on('billing')->onDelete('cascade');
         });
     }
 
