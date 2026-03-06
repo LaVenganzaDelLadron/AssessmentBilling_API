@@ -7,54 +7,54 @@ use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\AssessmentItemsController ;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\PaymentController;
-
+use App\Models\AssessmentItems;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
 
-Route::prefix('customers')->group(function () {
+Route::prefix('customers')->controller(CustomerController::class)->group(function () {
     // Customer Routes
-    Route::post('/add', [CustomerController::class, 'addCustomer'])->name('customers.add');
-    Route::get('/all', [CustomerController::class, 'getAllCustomer'])->name('customers.get_all');
-    Route::put('/edit/{customer_id}', [CustomerController::class, 'editCustomer'])->name('customers.edit');
-    Route::delete('/delete/{customer_id}', [CustomerController::class, 'deleteCustomer'])->name('customers.delete');
+    Route::post('/add', 'addCustomer')->name('customers.add');
+    Route::get('/all', 'getAllCustomer')->name('customers.get_all');
+    Route::put('/edit/{customer_id}', 'editCustomer')->name('customers.edit');
+    Route::delete('/delete/{customer_id}', 'deleteCustomer')->name('customers.delete');
 });
 
-Route::prefix('assessments')->group(function () {
+Route::prefix('assessments')->controller(AssessmentController::class)->group(function () {
     // Assessment Routes
-    Route::post('/add', [AssessmentController::class, 'addAssessment'])->name('assessments.add');
-    Route::get('/all', [AssessmentController::class, 'getAllAssessment'])->name('assessments.get_all');
-    Route::put('/edit/{assessment_id}', [AssessmentController::class, 'editAssessment'])->name('assessments.edit');
-    Route::delete('/delete/{assessment_id}', [AssessmentController::class, 'deleteAssessment'])->name('assessments.delete');
+    Route::post('/add', 'addAssessment')->name('assessments.add');
+    Route::get('/all', 'getAllAssessment')->name('assessments.get_all');
+    Route::put('/edit/{assessment_id}',  'editAssessment')->name('assessments.edit');
+    Route::delete('/delete/{assessment_id}', 'deleteAssessment')->name('assessments.delete');
 });
 
-Route::prefix('assessment-items')->group(function () {
+Route::prefix('assessment-items')->controller(AssessmentItemsController::class)->group(function () {
     // Assessment Items Routes
-    Route::post('/add', [AssessmentItemsController::class, 'addAssessmentItem'])->name('assessment_items.add');
-    Route::get('/all', [AssessmentItemsController::class, 'getAllAssessmentItems'])->name('assessment_items.get_all');
-    Route::put('/edit/{id}', [AssessmentItemsController::class, 'editAssessmentItem'])->name('assessment_items.edit');
-    Route::delete('/delete/{id}', [AssessmentItemsController::class, 'deleteAssessmentItem'])->name('assessment_items.delete');
+    Route::post('/add', 'addAssessmentItem')->name('assessment_items.add');
+    Route::get('/all', 'getAllAssessmentItems')->name('assessment_items.get_all');
+    Route::put('/edit/{id}', 'editAssessmentItem')->name('assessment_items.edit');
+    Route::delete('/delete/{id}', 'deleteAssessmentItem')->name('assessment_items.delete');
 });
 
 
 
-Route::prefix('billings')->group(function () {
+Route::prefix('billings')->controller(BillingController::class)->group(function () {
     // Billing Routes
-    Route::post('/add', [BillingController::class, 'addBilling'])->name('billings.add');
-    Route::get('/all', [BillingController::class, 'getAllBilling'])->name('billings.get_all');
-    Route::put('/edit/{billing_id}', [BillingController::class, 'editBilling'])->name('billings.edit');
-    Route::delete('/delete/{billing_id}', [BillingController::class, 'deleteBilling'])->name('billings.delete');
+    Route::post('/add', 'addBilling')->name('billings.add');
+    Route::get('/all', 'getAllBilling')->name('billings.get_all');
+    Route::put('/edit/{billing_id}',  'editBilling')->name('billings.edit');
+    Route::delete('/delete/{billing_id}', 'deleteBilling')->name('billings.delete');
 });
 
 
-Route::prefix('payments')->group(function () {
+Route::prefix('payments')->controller(PaymentController::class)->group(function () {
     // Payment Routes
-    Route::post('/add', [PaymentController::class, 'addPayment'])->name('payments.add');
-    Route::get('/all', [PaymentController::class, 'getAllPayments'])->name('payments.get_all');
-    Route::put('/edit/{payment_id}', [PaymentController::class, 'editPayment'])->name('payments.edit');
-    Route::delete('/delete/{payment_id}', [PaymentController::class, 'deletePayment'])->name('payments.delete');
+    Route::post('/add', 'addPayment')->name('payments.add');
+    Route::get('/all',  'getAllPayments')->name('payments.get_all');
+    Route::put('/edit/{payment_id}', 'editPayment')->name('payments.edit');
+    Route::delete('/delete/{payment_id}', 'deletePayment')->name('payments.delete');
 });
 
 
